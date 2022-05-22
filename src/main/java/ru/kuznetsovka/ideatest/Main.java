@@ -5,13 +5,13 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.SneakyThrows;
 
-
 import java.io.File;
 import java.time.Duration;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static ru.kuznetsovka.ideatest.TimeService.*;
+import static ru.kuznetsovka.ideatest.TimeService.convertMinuteToStringFormat;
+import static ru.kuznetsovka.ideatest.TimeService.getPercentileTime;
 
 public class Main {
     @SneakyThrows
@@ -29,7 +29,7 @@ public class Main {
 
         System.out.println("Среднее время перелета:" + convertMinuteToStringFormat(averageTime));
         Set<Long> durationArr = wrapper.getTickets().stream().map(JsonEntity::getDuration).map(Duration::toMinutes).collect(Collectors.toSet());
-        System.out.println("90 перцентиль времени перелета:" + convertMinuteToStringFormat(getPercentileTime(durationArr,90)));
+        System.out.println("90-й процентиль времени перелета:" + convertMinuteToStringFormat(getPercentileTime(durationArr,90)));
     }
 
 
