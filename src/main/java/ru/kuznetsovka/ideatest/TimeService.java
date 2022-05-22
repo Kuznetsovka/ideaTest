@@ -2,9 +2,8 @@ package ru.kuznetsovka.ideatest;
 
 import java.time.Duration;
 import java.time.LocalTime;
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 
 import static java.lang.Integer.parseInt;
 
@@ -23,9 +22,9 @@ public class TimeService {
         ).toString();
     }
 
-    public static long getPercentileTime(Set<Long> minutes, double percentile){
-        List<Long> list = new ArrayList<>(minutes);
-        int index = (int)Math.ceil((percentile / (double) 100) * (double)list.size());
-        return list.get(index - 1);
+    public static long getPercentileTime(List<Long> minutes, double percentile){
+        minutes.sort(Comparator.naturalOrder());
+        int index = (int)Math.ceil((percentile / (double) 100) * (double)minutes.size());
+        return minutes.get(index - 1);
     }
 }

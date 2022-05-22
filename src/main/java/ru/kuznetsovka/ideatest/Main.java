@@ -7,7 +7,7 @@ import lombok.SneakyThrows;
 
 import java.io.File;
 import java.time.Duration;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static ru.kuznetsovka.ideatest.TimeService.convertMinuteToStringFormat;
@@ -28,7 +28,7 @@ public class Main {
                 .collect(Collectors.averagingLong(Duration::toMinutes)).longValue();
 
         System.out.println("Среднее время перелета:" + convertMinuteToStringFormat(averageTime));
-        Set<Long> durationArr = wrapper.getTickets().stream().map(JsonEntity::getDuration).map(Duration::toMinutes).collect(Collectors.toSet());
+        List<Long> durationArr = wrapper.getTickets().stream().map(JsonEntity::getDuration).map(Duration::toMinutes).collect(Collectors.toList());
         System.out.println("90-й процентиль времени перелета:" + convertMinuteToStringFormat(getPercentileTime(durationArr,90)));
     }
 
